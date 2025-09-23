@@ -9,22 +9,22 @@ commands:
 
   flags:
   - long: --vps_name
-    short: -vn
+    short: -n
     arg: vps_name
     help: A name to remember this VPS. Don't use spaces
 
   - long: --vps_ip
-    short: -vi
+    short: -i
     arg: vps_ip
-    help: The IP address of your VPS
+    help: The IP address to login at your VPS
 
   - long: --vps_user
-    short: -vu
+    short: -u
     arg: vps_user
     help: The user to login at your VPS
 
   - long: --ssh_port
-    short: -sp
+    short: -p
     arg: ssh_port
     help: The port to login at your VPS
   
@@ -32,33 +32,33 @@ commands:
   examples:
   - bash-tunnels --vps_name=my_vps --vps_ip=127.0.0.1 --vps_user=root --ssh_port=22 
   - bash-tunnels  #Runs the interactive mode
-  - bash-tunnels -vn=my_vps -vi=127.0.0.1 -vu=root -sp=22 
+  - bash-tunnels -n=my_vps -i=127.0.0.1 -u=root -p=22 
 
 - name: list_vps
   alias: lv
   help: List all the available VPS
 
   examples:
-  - bash-tunnels lv 
+  - bash-tunnels l
   - bash-tunnels list_vps
 
 - name: add_tunnel
   alias: at
-  help: Add a new tunnel into a existing VPS
+  help: Add a new tunnel into an existing VPS
 
   flags:
   - long: --vps_name
-    short: -vn
+    short: -n
     arg: vps_name
     help: The VPS to add the tunnel
 
   - long: --local_port
-    short: -lp
+    short: -l
     arg: local_port
     help: The local port. This should be the port where your service is running locally
   
   - long: --remote_port
-    short: -rp
+    short: -r
     arg: remote_port
     help: The remote port. This should be the port where your service will be accessible on the VPS
   
@@ -66,7 +66,7 @@ commands:
   examples:
   - bash-tunnels add_tunnel --vps_name=my_vps --local_port=3000 --remote_port=3000
   - bash-tunnels at
-  - bash-tunnels add_tunnel -vn=my_vps -lp=3000 -rp=3000
+  - bash-tunnels add_tunnel -n=my_vps -l=3000 -r=3000
 
 - name: list_tunnels
   alias: lt
@@ -82,10 +82,10 @@ commands:
 
   flags:
   - long: --tunnel_name
-    short: -tn
+    short: -n
     arg: tunnel_name
     help: The tunnel name. You can get it using the list_tunnels command
 
   examples:
-  - bash-tunnels st -tn=bash-tunnels-my_vps
+  - bash-tunnels st -n=bash-tunnels-my_vps
   - bash-tunnels status_tunnel --tunnel_name=bash-tunnels-my_vps
