@@ -11,7 +11,7 @@ commands:
   - long: --vps_name
     short: -n
     arg: vps_name
-    help: A name to remember this VPS. Don't use spaces
+    help: A unique name for the VPS (e.g., my_vps)
 
   - long: --vps_ip
     short: -i
@@ -50,7 +50,7 @@ commands:
   - long: --vps_name
     short: -n
     arg: vps_name
-    help: The VPS to add the tunnel
+    help: The VPS name to connect the tunnel
 
   - long: --local_port
     short: -l
@@ -89,3 +89,19 @@ commands:
   examples:
   - bash-tunnels st -n=bash-tunnels-my_vps
   - bash-tunnels status_tunnel --tunnel_name=bash-tunnels-my_vps
+
+- name: show_key
+  alias: sk
+  help: Shows the public SSH key and instructions on how to add it on the remote VPS.
+
+  examples:
+  - bash-tunnels sk
+  - bash-tunnels show_key
+
+- name: uninstall
+  alias: ut
+  help: Completely remove bash-tunnels from your system
+
+  examples:
+  - bash-tunnels ut
+  - bash-tunnels uninstall
