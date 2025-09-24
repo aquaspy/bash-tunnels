@@ -1,9 +1,9 @@
 
 # Set ownership and permissions
 setup_permissions(){
-    actual_user=$(basename "$user_home")
-    chown -R $actual_user:$actual_user "$PROJECT_DIR"
-    green "Permissions set for $PROJECT_DIR."
+    ACTUAL_USER=$(basename "$user_home")
+    chown -R $ACTUAL_USER:$ACTUAL_USER "$PROJECT_DIR"
+    blue "Permissions set for $PROJECT_DIR."
 
 
 }

@@ -8,6 +8,7 @@ else
 fi
 PROJECT_DIR="$user_home/.bash-tunnels"
 SSH_KEY_PATH="$PROJECT_DIR/id_ed25519"
+PUBLIC_SSH_KEY_PATH="$PROJECT_DIR/id_ed25519.pub"
 VPS_FILE="$PROJECT_DIR/vps.txt"
 SERVICE_DIR="/etc/systemd/system"
 
@@ -27,10 +28,9 @@ setup_key() {
         yellow "Generating Ed25519 SSH key..."
         ssh-keygen -t ed25519 -f "$SSH_KEY_PATH" -N "" >/dev/null 2>&1  # Suppress output
         green_bold "Key generated successfully at $SSH_KEY_PATH."
-        green_underlined "Add the following public key to the external server:"
-        cyan "$(cat "${SSH_KEY_PATH}.pub")"
+        show_key #shows the ssh key instructions
     else
-        yellow "SSH key already exists at $SSH_KEY_PATH."
+        show_key
     fi
 }
 

@@ -67,6 +67,6 @@ fi
 setup_key #creating ssh key
 
 echo "${vps_name},${vps_ip},${vps_user},${ssh_port}" >> "$VPS_FILE"
-echo "bash-tunnels: VPS '${vps_name}' added."
+green_bold "VPS '${vps_name}' added."
 
 setup_permissions
