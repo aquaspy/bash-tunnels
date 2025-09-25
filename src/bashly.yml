@@ -152,14 +152,24 @@ commands:
   alias: rt
   help: Completely restore a bash-tunnels backup including all tunnels and ssh key
 
+  flags:
+  - long: --backup_file
+    short: -f
+    arg: backup_file
+    help: The backup file. It must be a zip file.
+
+  - long: --clean
+    short: -c
+    help: Purges any existing bash-tunnels file before restoring the backup
+
   examples:
   - bash-tunnels rt
   - bash-tunnels restore
 
 - name: uninstall
-  alias: ut
+  alias: un
   help: Completely remove bash-tunnels from your system including all tunnels and ssh key
 
   examples:
-  - bash-tunnels ut
+  - bash-tunnels un
   - bash-tunnels uninstall

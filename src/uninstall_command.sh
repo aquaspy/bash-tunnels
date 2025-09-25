@@ -1,5 +1,19 @@
-echo "# This file is located at 'src/uninstall_command.sh'."
-echo "# It contains the implementation for the 'bash-tunnels uninstall' command."
-echo "# The code you write here will be wrapped by a function named 'bash_tunnels_uninstall_command()'."
-echo "# Feel free to edit this file; your changes will persist when regenerating."
-inspect_args
+    yellow "Uninstalling bash-tunnels..."
+
+    # Purge data
+    purge_tunnel_all
+    purge_vps_all
+
+    # Remove project directory
+    if [[ -d "$PROJECT_DIR" ]]; then
+        rm -rf "$PROJECT_DIR"
+        green "Removed $PROJECT_DIR"
+    fi
+
+    # Remove symlink if exists
+    if [[ -L "/usr/local/bin/bash-tunnels" ]]; then
+        sudo rm /usr/local/bin/bash-tunnels
+        green "Removed symlink from /usr/local/bin/bash-tunnels"
+    fi
+
+    green "Uninstallation complete."

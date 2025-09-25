@@ -15,7 +15,7 @@ SERVICE_DIR="/etc/systemd/system"
 
 # Check if root
 if [[ $EUID -ne 0 ]]; then
-    echo "bash-tunnels: This script must be run as root (use sudo)."
+    red "This script must be run as root (use sudo)."
     exit 1
 fi
 
