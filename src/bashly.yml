@@ -36,7 +36,7 @@ commands:
 
 - name: list_vps
   alias: lv
-  help: List all the available VPS
+  help: List all the available VPSs
 
   examples:
   - bash-tunnels l
@@ -61,6 +61,11 @@ commands:
     short: -r
     arg: remote_port
     help: The remote port. This should be the port where your service will be accessible on the VPS
+
+  - long: --tunnel_title
+    short: -t
+    arg: tunnel_title
+    help: The tunnel title. This helps to identify the tunnel later.
   
 
   examples:
@@ -81,14 +86,14 @@ commands:
   help: Check the status of a specific tunnel
 
   flags:
-  - long: --tunnel_name
-    short: -n
-    arg: tunnel_name
-    help: The tunnel name. You can get it using the list_tunnels command
+  - long: --tunnel_title
+    short: -t
+    arg: tunnel_title
+    help: The tunnel title. You can get it using the list_tunnels command
 
   examples:
-  - bash-tunnels st -n=bash-tunnels-my_vps
-  - bash-tunnels status_tunnel --tunnel_name=bash-tunnels-my_vps
+  - bash-tunnels st -t=bash-tunnels-my_vps
+  - bash-tunnels status_tunnel --tunnel_title=bash-tunnels-my_vps
 
 - name: show_key
   alias: sk
@@ -98,9 +103,62 @@ commands:
   - bash-tunnels sk
   - bash-tunnels show_key
 
+- name: purge_vps
+  alias: pv
+  help: Purge one VPS from your VPS file.
+
+  flags:
+  - long: --vps_name
+    short: -n
+    arg: vps_name
+    help: The VPS name. You can get it using the list_vps command
+
+
+  - long: --all
+    short: -a
+    help: Remove all your VPSs from the VPS file. Be careful when using this command.
+
+  examples:
+  - bash-tunnels pv my_vps
+  - bash-tunnels purge_vps --all
+
+- name: purge_tunnel
+  alias: pt
+  help: Completely remove a bash-tunnel from your system
+
+  flags:
+  - long: --tunnel_title
+    short: -t
+    arg: tunnel_title
+    help: The tunnel title. You can get it using the list_tunnels command
+
+  - long: --all
+    short: -a
+    help: Disable and remove all your tunnels created with bash-tunnels. Be careful when using this command.
+
+  examples:
+  - bash-tunnels pt
+  - bash-tunnels purge_tunnel --all
+
+- name: backup
+  alias: bk
+  help: Create a full bash-tunnels backup including all tunnels and ssh key
+
+  examples:
+  - bash-tunnels bk
+  - bash-tunnels backup
+
+- name: restore
+  alias: rt
+  help: Completely restore a bash-tunnels backup including all tunnels and ssh key
+
+  examples:
+  - bash-tunnels rt
+  - bash-tunnels restore
+
 - name: uninstall
   alias: ut
-  help: Completely remove bash-tunnels from your system
+  help: Completely remove bash-tunnels from your system including all tunnels and ssh key
 
   examples:
   - bash-tunnels ut
