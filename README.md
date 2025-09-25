@@ -25,7 +25,7 @@ A complete Bash application to manage and create SSH tunnels on a remote VPS. It
 ### Basic Installation (Recommended)
 ```bash
 # Create project directory
-mkdir -p ~/.bash-tunnels && curl -L -o ~/.bash-tunnels/bash-tunnels https://github.com/aquaspy/bash-tunnels/releases/latest/download/bash-tunnels- && chmod +x ~/.bash-tunnels/bash-tunnels && sudo ln -s ~/.bash-tunnels/bash-tunnels /usr/local/bin/bash-tunnels
+mkdir -p ~/.bash-tunnels && curl -L -o ~/.bash-tunnels/bash-tunnels https://github.com/aquaspy/bash-tunnels/releases/latest/download/bash-tunnels && chmod +x ~/.bash-tunnels/bash-tunnels && sudo ln -s ~/.bash-tunnels/bash-tunnels /usr/local/bin/bash-tunnels
 ```
 
 ### Test
