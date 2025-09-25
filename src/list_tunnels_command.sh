@@ -1,14 +1,17 @@
-# Find all matching service files
-services=$(find "$SERVICE_DIR" -name "bash-tunnels-*.service" 2>/dev/null)
+# Find all matching service files (only in the top-level directory, avoid symlinks in subdirs)
+services=($(find "$SERVICE_DIR" -maxdepth 1 -name "bash-tunnels-*.service" 2>/dev/null | sort | uniq))
 
 # Check if any services were found
-if [[ -z "$services" ]]; then
+if [[ ${#services[@]} -eq 0 ]]; then
     yellow "No bash-tunnels services found in $SERVICE_DIR."
     exit 0
 fi
 
+# Initialize counter
+count=1
+
 # Process each service
-while IFS= read -r service; do
+for service in "${services[@]}"; do
     # Extract the Description line (e.g., "bash-tunnels: Tunnel ...")
     description=$(grep "^Description=" "$service" | sed 's/Description=//')
 
@@ -20,6 +23,9 @@ while IFS= read -r service; do
 
     # Print service name and description with colors
     echo ""
-    magenta_bold "Tunnel title: $(basename "$service")"
+    magenta_bold "Tunnel #$count: $(basename "$service")"
     green_bold "  Description: " && white "$description"
-done <<< "$services"
+
+    # Increment counter
+    ((count++))
+done

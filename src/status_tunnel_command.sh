@@ -2,7 +2,7 @@ tunnel_title=${args[--tunnel_title]}
 
 if [[ -z "$tunnel_title" ]]; then
     while true; do
-        green "Please type the tunnel service name (e.g., cool_game.service or bash-tunnels-cool_game.service)"
+        green "Please type the tunnel service name (e.g., cool_game, cool_game.service or bash-tunnels-cool_game.service)"
         read tunnel_title
         if [[ -n "$tunnel_title" ]]; then
             break
