@@ -6,10 +6,10 @@ original_dir="$PWD"
 
 # Copy files to temp dir
 cp -r "$PROJECT_DIR" "$temp_dir/" 2>/dev/null || red "Failed to copy $PROJECT_DIR"
-sudo cp "$SERVICE_DIR"/bash-tunnels-*.service "$temp_dir/" 2>/dev/null
+cp "$SERVICE_DIR"/bash-tunnels-*.service "$temp_dir/" 2>/dev/null
 
 # Change ownership to root for zipping
-sudo chown -R root:root "$temp_dir"
+chown -R root:root "$temp_dir"
 
 # Create ZIP with timestamped name
 BACKUP_FILE="bash-tunnels-backup-$(date +%Y-%m-%d_%H-%M-%S).zip"

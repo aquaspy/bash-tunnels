@@ -1,11 +1,16 @@
-purge_vps_all(){
-    # Create an empty temp file
-    temp_file=$(mktemp)
-    touch "$temp_file"
-    # Replace the original file with the empty one
-    mv "$temp_file" "$VPS_FILE"
-    green "All VPS entries have been successfully purged from the list."
+purge_vps_all() {
+    if [[ -f "$VPS_FILE" ]]; then
+        # Create an empty temp file
+        temp_file=$(mktemp)
+        touch "$temp_file"
+        # Replace the original file with the empty one
+        mv "$temp_file" "$VPS_FILE"
+        green "All VPS entries have been successfully purged from the list."
+    else
+        yellow "No VPS file found to purge."
+    fi
 }
+
 
 purge_vps(){
     vps_name="$1"

@@ -50,8 +50,8 @@ if [[ ${args[--clean]} = 1 ]]; then
     # Clean mode: overwrite
     cp -r "$temp_dir/.bash-tunnels" "$user_home/"
     yellow "Restored $PROJECT_DIR (overwritten)"
-    sudo cp "$temp_dir"/*.service "$SERVICE_DIR/" 2>/dev/null
-    sudo chmod 644 "$SERVICE_DIR"/bash-tunnels-*.service 2>/dev/null
+    cp "$temp_dir"/*.service "$SERVICE_DIR/" 2>/dev/null
+    chmod 644 "$SERVICE_DIR"/bash-tunnels-*.service 2>/dev/null
     yellow "Restored services (overwritten)"
 else
     # Merge mode: skip existing files, merge vps.txt
@@ -65,8 +65,8 @@ else
     yellow "Merged vps.txt (skipped duplicates by name)"
 
     # Restore services (skip existing)
-    sudo cp -n "$temp_dir"/*.service "$SERVICE_DIR/" 2>/dev/null
-    sudo chmod 644 "$SERVICE_DIR"/bash-tunnels-*.service 2>/dev/null
+    cp -n "$temp_dir"/*.service "$SERVICE_DIR/" 2>/dev/null
+    chmod 644 "$SERVICE_DIR"/bash-tunnels-*.service 2>/dev/null
     yellow "Restored services (skipped existing services if any)"
 fi
 
@@ -77,14 +77,14 @@ setup_permissions
 for service_file in "$SERVICE_DIR"/bash-tunnels-*.service; do
     if [[ -f "$service_file" ]]; then
         service_name=$(basename "$service_file")
-        sudo systemctl enable "$service_name" 2>/dev/null
-        sudo systemctl start "$service_name" 2>/dev/null
+        systemctl enable "$service_name" 2>/dev/null
+        systemctl start "$service_name" 2>/dev/null
         green "Enabled and started: $service_name"
     fi
 done
 
 # Reload systemd
-sudo systemctl daemon-reload
+systemctl daemon-reload
 
 # Cleanup
 rm -rf "$temp_dir"

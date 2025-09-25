@@ -12,7 +12,7 @@
 
     # Remove symlink if exists
     if [[ -L "/usr/local/bin/bash-tunnels" ]]; then
-        sudo rm /usr/local/bin/bash-tunnels
+        rm /usr/local/bin/bash-tunnels
         green "Removed symlink from /usr/local/bin/bash-tunnels"
     fi
 

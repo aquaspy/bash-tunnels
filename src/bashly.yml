@@ -27,19 +27,19 @@ commands:
     short: -p
     arg: ssh_port
     help: The port to login at your VPS
-  
+
 
   examples:
-  - bash-tunnels --vps_name=my_vps --vps_ip=127.0.0.1 --vps_user=root --ssh_port=22 
-  - bash-tunnels  #Runs the interactive mode
-  - bash-tunnels -n=my_vps -i=127.0.0.1 -u=root -p=22 
+  - bash-tunnels add_vps --vps_name=my_vps --vps_ip=127.0.0.1 --vps_user=root --ssh_port=22 
+  - bash-tunnels av  # Runs interactive mode if flags are omitted
+  - bash-tunnels add_vps -n=my_vps -i=127.0.0.1 -u=root -p=22 
 
 - name: list_vps
   alias: lv
   help: List all the available VPSs
 
   examples:
-  - bash-tunnels l
+  - bash-tunnels lv
   - bash-tunnels list_vps
 
 - name: add_tunnel
@@ -56,7 +56,7 @@ commands:
     short: -l
     arg: local_port
     help: The local port. This should be the port where your service is running locally
-  
+
   - long: --remote_port
     short: -r
     arg: remote_port
@@ -66,12 +66,12 @@ commands:
     short: -t
     arg: tunnel_title
     help: The tunnel title. This helps to identify the tunnel later.
-  
+
 
   examples:
-  - bash-tunnels add_tunnel --vps_name=my_vps --local_port=3000 --remote_port=3000
-  - bash-tunnels at
-  - bash-tunnels add_tunnel -n=my_vps -l=3000 -r=3000
+  - bash-tunnels add_tunnel --vps_name=my_vps --local_port=3000 --remote_port=3000 --tunnel_title=my_app
+  - bash-tunnels at  # Runs interactive mode if flags are omitted
+  - bash-tunnels add_tunnel -n=my_vps -l=3000 -r=3000 -t=my_app
 
 - name: list_tunnels
   alias: lt
@@ -92,8 +92,8 @@ commands:
     help: The tunnel title. You can get it using the list_tunnels command
 
   examples:
-  - bash-tunnels st -t=bash-tunnels-my_vps
-  - bash-tunnels status_tunnel --tunnel_title=bash-tunnels-my_vps
+  - bash-tunnels status_tunnel --tunnel_title=my_app
+  - bash-tunnels st -t=my_app
 
 - name: show_key
   alias: sk
@@ -119,8 +119,8 @@ commands:
     help: Remove all your VPSs from the VPS file. Be careful when using this command.
 
   examples:
-  - bash-tunnels pv my_vps
-  - bash-tunnels purge_vps --all
+  - bash-tunnels purge_vps --vps_name=my_vps
+  - bash-tunnels pv --all
 
 - name: purge_tunnel
   alias: pt
@@ -137,8 +137,8 @@ commands:
     help: Disable and remove all your tunnels created with bash-tunnels. Be careful when using this command.
 
   examples:
-  - bash-tunnels pt
-  - bash-tunnels purge_tunnel --all
+  - bash-tunnels purge_tunnel --tunnel_title=my_app
+  - bash-tunnels pt --all
 
 - name: backup
   alias: bk
@@ -163,8 +163,8 @@ commands:
     help: Purges any existing bash-tunnels file before restoring the backup
 
   examples:
-  - bash-tunnels rt
-  - bash-tunnels restore
+  - bash-tunnels restore --backup_file=bash-tunnels-backup-20250101_120000.zip
+  - bash-tunnels rt --clean --backup_file=bash-tunnels-backup-20250101_120000.zip
 
 - name: uninstall
   alias: un

@@ -11,15 +11,15 @@ purge_tunnel_all(){
         cyan_bold "Purging tunnel: $service_name"
 
         # Stop and disable
-        sudo systemctl stop "$service_name" 2>/dev/null
-        sudo systemctl disable "$service_name" 2>/dev/null
+        systemctl stop "$service_name" 2>/dev/null
+        systemctl disable "$service_name" 2>/dev/null
 
         # Remove the service file
-        sudo rm -f "$service_file"
+        rm -f "$service_file"
     done
 
     # Reload systemd
-    sudo systemctl daemon-reload
+    systemctl daemon-reload
     green "All tunnels have been successfully purged."
 }
 
@@ -45,14 +45,14 @@ purge_tunnel(){
     cyan_bold "Purging tunnel: $service_name"
 
     # Stop and disable
-    sudo systemctl stop "$service_name" 2>/dev/null
-    sudo systemctl disable "$service_name" 2>/dev/null
+    systemctl stop "$service_name" 2>/dev/null
+    systemctl disable "$service_name" 2>/dev/null
 
     # Remove the service file
-    sudo rm -f "$service_file"
+    rm -f "$service_file"
 
     # Reload systemd
-    sudo systemctl daemon-reload
+    systemctl daemon-reload
 
     # Success message
     green "Tunnel '$1' has been successfully purged."
