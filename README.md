@@ -18,6 +18,7 @@ A complete Bash application to manage and create SSH tunnels on a remote VPS. It
 
 - Any Linux distro with systemd and SSH access.
 - Dependencies: ```bash```, ```systemd```, ```openssh```, ```unzip``` (for restore).
+- One remote VPS
 
 ## Installation
 
