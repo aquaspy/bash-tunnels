@@ -49,5 +49,8 @@ fi
 # Replace the original file with the temp file
 mv "$temp_file" "$VPS_FILE"
 
+#Setup permissions
+setup_permissions
+
 # Success message
 green "VPS '$vps_name' has been successfully purged from the list."

@@ -1,14 +1,14 @@
 tunnel_title=${args[--tunnel_title]}
 if [[ ${args[--all]} = 1 ]]; then
-    # Find all bash-tunnels services
-    services=$(find /etc/systemd/system -name "bash-tunnels-*.service" 2>/dev/null)
-    if [[ -z "$services" ]]; then
+    # Find all bash-tunnels services (only in top-level, avoid symlinks in subdirs)
+    services=($(find /etc/systemd/system -maxdepth 1 -name "bash-tunnels-*.service" 2>/dev/null | sort | uniq))
+    if [[ ${#services[@]} -eq 0 ]]; then
         yellow "No tunnels found to purge."
         exit 0
     fi
 
     # Purge all tunnels
-    while IFS= read -r service_file; do
+    for service_file in "${services[@]}"; do
         service_name=$(basename "$service_file" .service)
         cyan_bold "Purging tunnel: $service_name"
 
@@ -18,13 +18,14 @@ if [[ ${args[--all]} = 1 ]]; then
 
         # Remove the service file
         sudo rm -f "$service_file"
-    done <<< "$services"
+    done
 
     # Reload systemd
     sudo systemctl daemon-reload
     green "All tunnels have been successfully purged."
     exit 0
 fi
+
 
 # Interactive mode for specific tunnel
 if [[ -z "$tunnel_title" ]]; then

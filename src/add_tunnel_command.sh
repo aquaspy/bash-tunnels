@@ -3,6 +3,16 @@ local_port=${args[--local_port]}
 remote_port=${args[--remote_port]}
 tunnel_title=${args[--tunnel_title]}
 
+#Checking if there is only one VPS
+if [[ -f "$VPS_FILE" ]]; then
+    vps_count=$(wc -l < "$VPS_FILE")
+    if [[ $vps_count -eq 1 ]]; then
+        # Auto-fill vps_name with the single VPS
+        vps_name=$(head -n 1 "$VPS_FILE" | cut -d',' -f1)
+        green "Only one VPS found. Using '$vps_name' automatically."
+    fi
+fi
+
 
 # Automated mode validation
 if [[ -n "$vps_name" ]] && ! validate_vps_exists "$vps_name"; then
