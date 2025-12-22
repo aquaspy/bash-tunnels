@@ -88,6 +88,20 @@ sudo bash-tunnels rt --clean --backup_file=bash-tunnels-backup-20250101_120000.z
 2. Run ```sudo bash-tunnels show_key``` and add the displayed public key to your VPS's ```~/.ssh/authorized_keys```.
 3. Add tunnels: ```sudo bash-tunnels add_tunnel```.
 
+For the tunnels to be accessible from the internet (not just localhost on the VPS), you must enable gateway ports on the remote VPS's SSH server.
+On your VPS (e.g., Ubuntu Server 24.04):
+
+Edit the SSH configuration file: ```sudo nano /etc/ssh/sshd_config```
+Add or uncomment the following line:
+```GatewayPorts yes``` 
+Save and exit, then restart the SSH service:
+```
+sudo systemctl daemon-reload
+sudo systemctl restart ssh
+```
+
+Without this setting, forwarded ports will only bind to localhost on the VPS and won't be reachable from the internet.
+
 ## Uninstallation
 
 ```bash
